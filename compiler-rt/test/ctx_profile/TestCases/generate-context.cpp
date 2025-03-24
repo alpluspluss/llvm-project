@@ -16,7 +16,7 @@
 #include <iostream>
 
 using namespace llvm::ctx_profile;
-extern "C" void __llvm_ctx_profile_start_collection();
+extern "C" void __llvm_ctx_profile_start_collection(bool);
 extern "C" bool __llvm_ctx_profile_fetch(ProfileWriter &);
 
 // avoid name mangling
@@ -159,7 +159,7 @@ bool profileWriter() {
 }
 
 int main(int argc, char **argv) {
-  __llvm_ctx_profile_start_collection();
+  __llvm_ctx_profile_start_collection(false);
   theRoot();
   flatFct();
   // This would be implemented in a specific RPC handler, but here we just call
